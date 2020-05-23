@@ -12,7 +12,7 @@ const routes = [
     },
     {
         path: '*',
-        component: Home
+        redirect: { name: 'Home' }
     }
 ]
 
