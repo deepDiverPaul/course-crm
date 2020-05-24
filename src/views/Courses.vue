@@ -2,7 +2,7 @@
     <section>
         <div class="level">
             <div class="level-right buttons has-text-right">
-                <router-link to="customer/add" class="button is-primary is-outlined">
+                <router-link to="courses/add" class="button is-primary is-outlined">
                     <b-icon icon="plus" pack="fas" size="is-small"></b-icon>
                     <span>Neu</span>
                 </router-link>
@@ -10,7 +10,7 @@
         </div>
 
         <b-table
-                :data="$root.data.customers"
+                :data="$root.data.courses"
                 :bordered="false"
                 :striped="true"
                 :narrowed="false"
@@ -22,17 +22,9 @@
                 <b-table-column field="customerId" label="Kd.-Nr." width="80">
                     {{ props.row.customerId }}
                 </b-table-column>
-                <b-table-column field="firstname" label="Anrede">
-                    {{ props.row.gender === 'female' ? 'Frau' : ( props.row.gender === 'male' ? 'Herr' : '') }}
-                </b-table-column>
-                <b-table-column field="firstname" label="Vorname">
-                    {{ props.row.firstname }}
-                </b-table-column>
-                <b-table-column field="lastname" label="Nachname">
-                    {{ props.row.lastname }}
-                </b-table-column>
+
                 <b-table-column label="Aktionen">
-                    <router-link :to="{ name: 'CustomerEdit', params: { _id: props.row._id } }">
+                    <router-link :to="{ name: 'CoursesEdit', params: { _id: props.row._id } }">
                         <b-icon icon="user-edit" pack="fas"></b-icon>
                     </router-link>
                 </b-table-column>
@@ -56,7 +48,7 @@
 
 <script>
     export default {
-        name: "Customers",
+        name: "Courses",
         data(){
             return {
                 rerender: 0
@@ -64,7 +56,7 @@
         },
         methods: {
             async update(){
-                await this.$root.updateData.customers()
+                await this.$root.updateData.courses()
                 this.rerender++
             }
         },

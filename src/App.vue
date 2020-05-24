@@ -6,7 +6,7 @@
                 <router-view/>
             </div>
         </div>
-        <b-loading :is-full-page="true" :active.sync="$root.cp.loading"></b-loading>
+        <b-loading :is-full-page="true" :active.sync="loading"></b-loading>
     </div>
 </template>
 
@@ -17,6 +17,11 @@
         name: 'App',
         components: {
             Navbar
+        },
+        computed: {
+            loading(){
+                return (this.$root.cp.loading || this.$root.env.loading)
+            }
         }
     }
 </script>
