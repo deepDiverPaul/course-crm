@@ -34,9 +34,9 @@
         <template slot="end">
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <router-link to="/login" class="button is-primary">
-                        <strong>Login</strong>
-                    </router-link>
+                    <a @click="logout()" class="button">
+                        <strong>Logout</strong>
+                    </a>
                 </div>
             </b-navbar-item>
         </template>
@@ -45,7 +45,12 @@
 
 <script>
     export default {
-        name: "Navbar"
+        name: "Navbar",
+        methods: {
+            logout(){
+                if (this.$root.cp.logout()) this.$router.push({name: 'Login'})
+            }
+        }
     }
 </script>
 

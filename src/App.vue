@@ -6,6 +6,7 @@
                 <router-view/>
             </div>
         </div>
+        <b-loading :is-full-page="true" :active.sync="$root.cp.loading"></b-loading>
     </div>
 </template>
 

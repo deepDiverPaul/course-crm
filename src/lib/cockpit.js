@@ -1,28 +1,39 @@
 export let cockpit = {
-    url: 'https://cockpit.startup.deep-node.de/api/',
-    lastRequest: '',
+    url: 'https://cockpit.susannespenke.deep-node.de/api/',
+    loading: false,
     user: {},
     authorized() {
         let auth = true
-        auth = this.user.api_key == '' ? false : auth
+        auth = typeof this.user.api_key !== 'string' ? false : auth
         return auth
     },
-    logout() {
-        this.user.api_key = ''
+    getAuth(){
+        let u
+        u = localStorage.getItem('user')
+        if (u === null) {
+            return false
+        }
+        this.user = JSON.parse(u)
         return true
     },
-    login() {
-        this.request(
+    logout() {
+        this.user = {}
+        localStorage.removeItem('user')
+        return !this.getAuth()
+    },
+    async login(username, password) {
+        return await this.request(
             'public/auth',
             {
-                user: 'test',
-                password: 'password'
+                user: username,
+                password: password
             },
             (user) => {
                 if(user.error){
                     return false
                 }else{
                     this.user = user
+                    localStorage.setItem('user', JSON.stringify(user))
                     return true
                 }
             },
@@ -31,7 +42,7 @@ export let cockpit = {
     },
     async request(task, payload = {}, success = data => console.log(data), failure = data => console.log(data)) {
         if (this.authorized() || task === 'public/auth') {
-            this.$root.env.loading = true
+            this.loading = true
             return await fetch(this.url + task + '?token=' + this.user.api_key, {
                 method: 'post',
                 headers: {
@@ -42,7 +53,7 @@ export let cockpit = {
                 .then(res => res.json())
                 .then(res => success(res))
                 .catch(err => failure(err))
-                .finally(() => {this.$root.env.loading = false})
+                .finally(() => {this.loading = false})
         } else {
             failure("Not authorized")
         }
