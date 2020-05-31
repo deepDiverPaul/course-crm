@@ -32,7 +32,7 @@ export default {
                 if (this.dateParsed) {
                     return this.$moment(this.dateParsed, "HH:mm").toDate()
                 }
-                return this.$moment().toDate()
+                return null
 
             },
             set(val) {

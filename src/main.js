@@ -46,6 +46,13 @@ new Vue({
                         (data) => data.entries
                     )
                 },
+                courseexeptions: async () => {
+                    this.data.courseexeptions = await this.cp.request(
+                        'collections/get/courseexeptions',
+                        {},
+                        (data) => data.entries
+                    )
+                },
                 customers: async () => {
                     this.data.customers = await this.cp.request(
                         'collections/get/customers',

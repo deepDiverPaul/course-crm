@@ -49,7 +49,7 @@ export default {
                 if (this.dateParsed) {
                     return this.$moment(this.dateParsed, "YYYY-MM-DD").toDate()
                 }
-                return this.$moment().toDate()
+                return null
 
             },
             set(val) {

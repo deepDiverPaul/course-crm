@@ -19,8 +19,8 @@
                 v-bind="rerender">
 
             <template slot-scope="props">
-                <b-table-column field="customerId" label="Kd.-Nr." width="80">
-                    {{ props.row.customerId }}
+                <b-table-column field="title" label="Titel">
+                    {{ props.row.title }}
                 </b-table-column>
 
                 <b-table-column label="Aktionen">

@@ -22,6 +22,9 @@
                     <option value="0">Sonntag</option>
                 </b-select>
             </b-field>
+            <b-field label="Ist es ein einmaliger Kurs?">
+                <b-checkbox v-model="form.singleDate">Ja</b-checkbox>
+            </b-field>
             <b-field label="Startdatum">
                 <Datepicker
                         :inline="false"
@@ -31,7 +34,7 @@
                         pack="fas">
                 </Datepicker>
             </b-field>
-            <b-field label="Enddatum">
+            <b-field label="Enddatum" v-if="form.singleDate !== true">
                 <Datepicker
                         :inline="false"
                         v-model="form.end"
